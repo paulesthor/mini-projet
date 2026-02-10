@@ -64,12 +64,8 @@ def transform_scores(df, valid_player_ids):
     # Note: NaN comparisons.
     df = df[df['score'] > 0]
     
-    # Remove rows with invalid dates (NaT) if that's implied by "Convert dates... appropriate types"
-    # The requirement doesn't explicitly say drop NaT, but usually analysis requires valid dates. 
-    # Let's keep NaT unless it breaks SQL. datetime in SQL can be NULL.
-    # However, 'played_at' is usually required. Let's filter NaT for safety or keep as None.
-    # Given "Sales data is dirty", dropping invalid dates is a standard cleaning step.
-    df = df.dropna(subset=['played_at'])
+    # Remove rows with invalid dates (NaT) -> CHANGED: NOW WE KEEP THEM AS NULL
+    # df = df.dropna(subset=['played_at'])
 
     # 4. Remove duplicates on (player_id, game), keeping the highest score
     # Sort by score descending, then drop duplicates keeping first (highest)
