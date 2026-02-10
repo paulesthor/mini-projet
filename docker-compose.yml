@@ -17,7 +17,7 @@ services:
 
   app:
     build: .
-    command: [ "./scripts/run_pipeline.sh" ]
+    command: [ "sh", "-c", "./scripts/run_pipeline.sh && tail -f /dev/null" ]
     depends_on:
       db:
         condition: service_healthy
