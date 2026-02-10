@@ -67,10 +67,9 @@ def transform_scores(df, valid_player_ids):
     # Remove rows with invalid dates (NaT) -> CHANGED: NOW WE KEEP THEM AS NULL
     # df = df.dropna(subset=['played_at'])
 
-    # 4. Remove duplicates on (player_id, game), keeping the highest score
-    # Sort by score descending, then drop duplicates keeping first (highest)
-    df = df.sort_values('score', ascending=False)
-    df = df.drop_duplicates(subset=['player_id', 'game'], keep='first')
+    # 4. Remove duplicates on (player_id, game), keeping the highest score -> REMOVED TO MATCH STRICT REQUIREMENTS
+    # df = df.sort_values('score', ascending=False)
+    # df = df.drop_duplicates(subset=['player_id', 'game'], keep='first')
 
     # 5. Filter orphans
     # valid_player_ids should be a list or set
