@@ -41,7 +41,8 @@ def transform_scores(df, valid_player_ids):
     1. Removes duplicates on score_id
     2. Converts dates and scores to numeric/datetime
     3. Removes negative or zero scores
-    4. Removes scores with player_id not in valid_player_ids
+    4. Removes duplicates on (player_id, game), keeping highest score
+    5. Removes scores with player_id not in valid_player_ids
     """
     original_count = len(df)
     
@@ -70,7 +71,12 @@ def transform_scores(df, valid_player_ids):
     # Given "Sales data is dirty", dropping invalid dates is a standard cleaning step.
     df = df.dropna(subset=['played_at'])
 
-    # 4. Filter orphans
+    # 4. Remove duplicates on (player_id, game), keeping the highest score
+    # Sort by score descending, then drop duplicates keeping first (highest)
+    df = df.sort_values('score', ascending=False)
+    df = df.drop_duplicates(subset=['player_id', 'game'], keep='first')
+
+    # 5. Filter orphans
     # valid_player_ids should be a list or set
     df = df[df['player_id'].isin(valid_player_ids)]
     

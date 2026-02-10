@@ -10,13 +10,14 @@ services:
       - db_data:/var/lib/mysql
       - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 10s
       timeout: 5s
       retries: 5
 
   app:
     build: .
+    command: [ "./scripts/run_pipeline.sh" ]
     depends_on:
       db:
         condition: service_healthy

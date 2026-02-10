@@ -13,14 +13,11 @@ Tout est orchestré via Docker Compose.
 
 ## Installation et Lancement
 1. Cloner le dépôt.
-2. Lancer le projet :
+2. Lancer le projet et générer le rapport :
    ```bash
    docker compose up -d --build
    ```
-3. Exécuter le pipeline :
-   ```bash
-   docker compose exec app ./scripts/run_pipeline.sh
-   ```
+3. Le pipeline s'exécute automatiquement.
 4. Le rapport sera généré dans `gametracker/output/rapport.txt`.
 
 ## Structure du Projet
