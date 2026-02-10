@@ -23,13 +23,30 @@ Tout est orchestré via Docker Compose.
 ## Structure du Projet
 ```
 gametracker/
-├── docker-compose.yml   # Orchestration des services
-├── Dockerfile           # Image de l'application Python
-├── requirements.txt     # Dépendances Python
-├── data/raw/            # Données sources (CSV)
-├── scripts/             # Scripts d'automatisation (SQL, Bash)
-├── src/                 # Code source Python (ETL, Config, Report)
-└── output/              # Rapports générés
+├── data/
+│   └── raw/
+│       ├── Players.csv
+│       └── Scores.csv
+├── output/
+│   └── rapport.txt
+├── scripts/
+│   ├── init-db.sql
+│   ├── run_pipeline.sh
+│   └── wait-for-db.sh
+├── src/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── database.py
+│   ├── extract.py
+│   ├── load.py
+│   ├── main.py
+│   ├── report.py
+│   └── transform.py
+├── .gitignore
+├── docker-compose.yml
+├── Dockerfile
+├── README.md
+└── requirements.txt
 ```
 
 ## Traitement des Données (Qualité)
